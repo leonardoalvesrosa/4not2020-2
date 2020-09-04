@@ -11,7 +11,7 @@ const esquema = mongoose.Schema({
         type: String,
         required: true
     },
-    carga_horaria: {
+    carga_horaria: { 
         type: Number,
         required: true,
         min: 4,
