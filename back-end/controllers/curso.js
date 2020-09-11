@@ -52,4 +52,35 @@ controller.novo = async (req, res) => {
     
 }
 
+// Operação RETRIVE (all), função listar()
+controller.listar = async (req, res) => {
+    try {
+        let dados = await Curso.find();  // Traz todos os cursos cadastrados
+        res.send(dados);  // Vai com status HTTP 200: OK
+    }
+    catch(erro) {
+        console.log(erro);
+        res.status(500).send(erro);
+    }
+    
+}
+
+// Operação RETRIVE (one), função obterUm()
+controller.obterUm = async (req, res) => {
+    try {
+        // Capturando o parâmetro id da url
+        const id = req.params.id;
+        let obj = await Curso.findById(id);
+
+        // O objeto existe e foi encontrado
+        if(obj) res.send(obj);  // HTTP 200
+        else res.status(404).end();
+    }
+    catch(erro) {
+        console.log(erro);
+        res.status(500).send(erro);
+    }
+    
+}
+
 module.exports = controller;
