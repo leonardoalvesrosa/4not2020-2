@@ -30,7 +30,7 @@
 
 // Controller é um conjunto de funções associadas às operações sobre dados
 
-const Turma = require('../models/SalaAula');
+const Turma = require('../models/Turma');
 
 const controller = {};   // Objeto vazio
 
