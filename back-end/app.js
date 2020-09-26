@@ -40,4 +40,13 @@ app.use('/sala-aula', sala_aula);
 const turma = require('./routes/turma');
 app.use('/turma', turma);
 
+const usuario = require('./routes/usuario')
+app.use('/usuario', usuario)
+
+const anuncioProd = require('./routes/anuncioProd')
+app.use('/anuncioProd', anuncioProd)
+
+const anuncioServ = require('./routes/anuncioServ')
+app.use('/anuncioServ', anuncioServ)
+
 module.exports = app;
