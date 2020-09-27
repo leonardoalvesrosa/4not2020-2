@@ -49,4 +49,10 @@ app.use('/anuncioProd', anuncioProd)
 const anuncioServ = require('./routes/anuncioServ')
 app.use('/anuncioServ', anuncioServ)
 
+const denuncia = require('./routes/denuncia')
+app.use('/denuncia', denuncia)
+
+const chat = require('./routes/chat')
+app.use('/chat', chat)
+
 module.exports = app;
