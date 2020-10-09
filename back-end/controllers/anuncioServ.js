@@ -57,9 +57,7 @@ controller.listar = async (req, res) => {
     try {
         // Traz todos os cursos cadastrados
         let dados = await AnuncioServ.find()
-            .populate('curso', 'nome') //somente o atributo nome
-            .populate('professor') // todos os atributos
-            .populate('sala_aula', 'nome capacidade') //somente nome e capacidade
+            .populate('usuario', 'nome') //somente o atributo nome
         res.send(dados);  // Vai com status HTTP 200: OK
     }
     catch(erro) {
