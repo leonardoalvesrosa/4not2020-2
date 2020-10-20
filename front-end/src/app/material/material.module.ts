@@ -56,7 +56,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatExpansionModule,
     MatButtonToggleModule,
     MatChipsModule,
-    MatIconModule, 
+    MatIconModule,
     MatProgressSpinnerModule,
     MatProgressBarModule,
     MatDialogModule,
