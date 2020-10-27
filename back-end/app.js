@@ -15,6 +15,12 @@ db(`mongodb+srv://${dbUser}:${dbPass}@cluster0.qeolf.gcp.mongodb.net/${dbName}?r
  
 var app = express();
  
+// Habilita a chamada do back-end a partir de um servidor distinto
+// É necessário instalar
+// npm install cors --saved
+const cors = require('cors');
+app.use(cors());
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
