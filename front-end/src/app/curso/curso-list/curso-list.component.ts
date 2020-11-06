@@ -10,7 +10,7 @@ export class CursoListComponent implements OnInit {
     // Nome da entidade no plural
     cursos : any = [];
 
-    displayedColumns: string[] = ['nome', 'carga_horaria', 'nivel', 'valor_curso'];
+    displayedColumns: string[] = ['nome', 'carga_horaria', 'nivel', 'valor_curso', 'editar', 'excluir'];
 
     // Injeção de dependência ou inversão de controle
     constructor(private cursoSrv : CursoService) { }
@@ -19,5 +19,10 @@ export class CursoListComponent implements OnInit {
         this.cursos = await this.cursoSrv.listar();
         console.log(this.cursos);
     }
-
+    
+    excluir(id: string){
+        if(confirm('Deseja realmente excluir?')) {
+            alert('Vai excluir o registro com id=' + id);
+        }
+    }
 }

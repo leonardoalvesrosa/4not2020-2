@@ -1,8 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import {​​​​ registerLocaleData }​​​​ from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import localePt from '@angular/common/locales/pt';
+registerLocaleData(localePt);
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { MainToolbarComponent } from './ui/main-toolbar/main-toolbar.component';
