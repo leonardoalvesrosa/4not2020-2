@@ -3,23 +3,23 @@
 <form class="std-form" #f="ngForm" (ngSubmit)="salvar(f)">
 
 	<mat-form-field>
-		<mat-label>Nome do curso</mat-label>
-		<input matInput placeholder="Informe o nome do curso" [(ngModel)]="curso.nome" name="nome" required>
+		<mat-label>Nome do turma</mat-label>
+		<input matInput placeholder="Informe o nome do turma" [(ngModel)]="turma.nome" name="nome" required>
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>Ementa</mat-label>
-    <textarea matInput [(ngModel)]="curso.ementa" placeholder="Informe a ementa do curso" name="ementa" rows="3" required></textarea>
+    <textarea matInput [(ngModel)]="turma.ementa" placeholder="Informe a ementa do turma" name="ementa" rows="3" required></textarea>
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>Carga horária</mat-label>
-    <input matInput type="number" [(ngModel)]="curso.carga_horaria" name="carga_horaria" required>
+    <input matInput type="number" [(ngModel)]="turma.carga_horaria" name="carga_horaria" required>
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>Nível</mat-label>
-    <mat-select [(ngModel)]="curso.nivel" name="nivel" required>
+    <mat-select [(ngModel)]="turma.nivel" name="nivel" required>
       <mat-option *ngFor="let nivel of niveis" [value]="nivel.valor">
         {{ nivel.valor }}
       </mat-option>
@@ -27,8 +27,8 @@
   </mat-form-field>
 
   <mat-form-field>
-    <mat-label>Valor do curso</mat-label>
-    <input matInput type="number" [(ngModel)]="curso.valor_curso" name="valor_curso" required>
+    <mat-label>Valor do turma</mat-label>
+    <input matInput type="number" [(ngModel)]="turma.valor_turma" name="valor_turma" required>
   </mat-form-field>
 
   <mat-toolbar class="form-buttons">

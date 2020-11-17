@@ -2,19 +2,22 @@
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { CursoService } from '../curso.service';
+import { TurmaService } from '../turma.service';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
+import { CursoService } from 'src/app/curso/curso.service';
+import { SalaAulaService } from 'src/app/sala-aula/sala-aula.service';
+import { ProfessorService } from 'src/app/professor/professor.service';
 
 @Component({
-  selector: 'app-curso-form',
-  templateUrl: './curso-form.component.html',
-  styleUrls: ['./curso-form.component.scss']
+  selector: 'app-turma-form',
+  templateUrl: './turma-form.component.html',
+  styleUrls: ['./turma-form.component.scss']
 })
 export class CursoFormComponent implements OnInit {
 
   // Variável para armazenar os dados do registro
-  curso : any = {}  // Objeto vazio, nome no SINGULAR
+  turma : any = {}  // Objeto vazio, nome no SINGULAR
 
   niveis : any = [
     { valor: 'Básico' },
@@ -22,10 +25,18 @@ export class CursoFormComponent implements OnInit {
     { valor: 'Avançado' }
   ]
 
-  title : string = 'Novo curso'
+  title : string = 'Nova turma'
+
+  // Varoáveis para armazenar as listagens de objetos relacionados
+  cursos: any = []  // Vetor, nome no PLURAL
+  professores : any = []
+  salasAula : any = []
 
   constructor(
+    private turmaSrv : TurmaService,
     private cursoSrv : CursoService,
+    private professorSrv : ProfessorService,
+    private salaAulaSrv : SalaAulaService,
     private snackBar : MatSnackBar,
     private location : Location,
     private actRoute : ActivatedRoute
@@ -37,9 +48,9 @@ export class CursoFormComponent implements OnInit {
       try {
         // 1) Acionar o back-end para buscar esse registro
         // e disponibilizá-lo para edição        
-        this.curso = await this.cursoSrv.obterUm(this.actRoute.snapshot.params['id'])
+        this.turma = await this.turmaSrv.obterUm(this.actRoute.snapshot.params['id'])
         // 2) Mudar o título da página
-        this.title = 'Editando curso'
+        this.title = 'Editando turma'
       }
       catch(erro) {
         console.log(erro)
@@ -49,17 +60,30 @@ export class CursoFormComponent implements OnInit {
     }
   }
 
+  async carregarDados(){
+    try{
+      this.cursos = await this.cursoSrv.listar()
+      this.professores = await this.professorSrv.listar()
+      this.salasAula = await this.salaAulaSrv.listar()
+    }
+    catch(erro){
+      console.log(erro)
+      this.snackBar.open(`ERRO: não foi possível carregar todos os dados
+      necessários para a página.`, 'Que pena', {duration:5000})
+    }
+  }
+
   async salvar(form: NgForm) {
     if(form.valid) {
       try {
         // 1) Salvar os dados no back-end
-        // Se o curso já existir (caso de edição), ele já terá
+        // Se o turma já existir (caso de edição), ele já terá
         // o atributo _id
-        if(this.curso._id) {
-          await this.cursoSrv.atualizar(this.curso) // Atualização
+        if(this.turma._id) {
+          await this.turmaSrv.atualizar(this.turma) // Atualização
         }
         else {
-          await this.cursoSrv.novo(this.curso)
+          await this.turmaSrv.novo(this.turma)
         }
         // 2) Dar o feedback para o usuário
         this.snackBar.open('Dados salvos com sucesso.', 'Entendi',

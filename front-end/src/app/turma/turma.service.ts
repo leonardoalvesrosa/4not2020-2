@@ -5,10 +5,10 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class CursoService {
+export class TurmaService {
 
   private apiServer : string = environment.apiServer
-  private apiUri : string = this.apiServer + 'curso'
+  private apiUri : string = this.apiServer + 'turma'
 
   constructor(private http: HttpClient) { }
 
@@ -19,7 +19,7 @@ export class CursoService {
   excluir(id: string) {
       // O método delete() nativo do HTTPClient não suporta a passagem de um body para
       // o back-end
-      //return this.http.delete(this.apiServer + 'curso/' + id).toPromise()
+      //return this.http.delete(this.apiServer + 'turma/' + id).toPromise()
       
       // O método request() pode usado com qualquer verbo e aceita a passagem de body
       return this.http.request('DELETE', this.apiUri, {body: {_id: id}}).toPromise()

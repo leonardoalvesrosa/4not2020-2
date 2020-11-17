@@ -5,10 +5,10 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class CursoService {
+export class ProfessorService {
 
   private apiServer : string = environment.apiServer
-  private apiUri : string = this.apiServer + 'curso'
+  private apiUri : string = this.apiServer + 'professor'
 
   constructor(private http: HttpClient) { }
 
