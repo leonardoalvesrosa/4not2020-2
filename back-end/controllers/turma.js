@@ -56,7 +56,7 @@ controller.novo = async (req, res) => {
 controller.listar = async (req, res) => {
     try {
         let dados = await Turma.find()
-            .populate('curso', 'nome')  // somente o atributo nome
+            .populate('curso', 'nome nivel')  // somente o atributo nome
             .populate('professor')   // Todos os atributos
             .populate('sala_aula', 'nome capacidade')   // Somente nome e capacidade 
         res.send(dados);  // Vai com status HTTP 200: OK

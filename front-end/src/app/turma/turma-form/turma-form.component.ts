@@ -1,4 +1,3 @@
-  
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
@@ -6,34 +5,40 @@ import { TurmaService } from '../turma.service';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { CursoService } from 'src/app/curso/curso.service';
-import { SalaAulaService } from 'src/app/sala-aula/sala-aula.service';
 import { ProfessorService } from 'src/app/professor/professor.service';
+import { SalaAulaService } from 'src/app/sala-aula/sala-aula.service';
 
 @Component({
   selector: 'app-turma-form',
   templateUrl: './turma-form.component.html',
   styleUrls: ['./turma-form.component.scss']
 })
-export class CursoFormComponent implements OnInit {
+export class TurmaFormComponent implements OnInit {
 
   // Variável para armazenar os dados do registro
   turma : any = {}  // Objeto vazio, nome no SINGULAR
 
-  niveis : any = [
-    { valor: 'Básico' },
-    { valor: 'Intermediário' },
-    { valor: 'Avançado' }
-  ]
-
   title : string = 'Nova turma'
 
-  // Varoáveis para armazenar as listagens de objetos relacionados
-  cursos: any = []  // Vetor, nome no PLURAL
+  // Variáveis para armazenar as listagens de objetos relacionados
+  cursos : any = []   // Vetor vazio, nome no PLURAL
   professores : any = []
   salasAula : any = []
 
+  // Dias da semana
+  diasSemana : any = [
+    { val: 'dom', descr: 'Domingo' },
+    { val: 'seg', descr: 'Segunda-feira' },
+    { val: 'ter', descr: 'Terça-feira' },
+    { val: 'qua', descr: 'Quarta-feira' },
+    { val: 'qui', descr: 'Quinta-feira' },
+    { val: 'sex', descr: 'Sexta-feira' },
+    { val: 'sáb', descr: 'Sábado' },
+  ]
+
   constructor(
     private turmaSrv : TurmaService,
+    // Services das entidades relacionadas
     private cursoSrv : CursoService,
     private professorSrv : ProfessorService,
     private salaAulaSrv : SalaAulaService,
@@ -58,22 +63,26 @@ export class CursoFormComponent implements OnInit {
           'Que pena!', { duration: 5000 })
       }
     }
+    // Carrega as listagens das entidades relacionadas
+    this.carregarDados()
   }
 
-  async carregarDados(){
-    try{
+  async carregarDados() {
+    try {
       this.cursos = await this.cursoSrv.listar()
       this.professores = await this.professorSrv.listar()
       this.salasAula = await this.salaAulaSrv.listar()
     }
-    catch(erro){
+    catch(erro) {
       console.log(erro)
-      this.snackBar.open(`ERRO: não foi possível carregar todos os dados
-      necessários para a página.`, 'Que pena', {duration:5000})
+      this.snackBar.open(`ERRO: não foi possível carregar todos os dados 
+        necessários para a página.`, 'Que pena', { duration: 5000 })
     }
   }
 
   async salvar(form: NgForm) {
+    //console.log(this.turma)
+    //return
     if(form.valid) {
       try {
         // 1) Salvar os dados no back-end
