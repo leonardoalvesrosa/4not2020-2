@@ -16,11 +16,20 @@ import { MainToolbarComponent } from './ui/main-toolbar/main-toolbar.component';
 import { MainFooterComponent } from './ui/main-footer/main-footer.component';
 import { MainMenuComponent } from './ui/main-menu/main-menu.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+
 import { CursoListComponent } from './curso/curso-list/curso-list.component';
 import { CursoFormComponent } from './curso/curso-form/curso-form.component';
-import { FormsModule } from '@angular/forms';
+
 import { TurmaListComponent } from './turma/turma-list/turma-list.component';
 import { TurmaFormComponent } from './turma/turma-form/turma-form.component';
+
+import { UsuarioListComponent } from './usuario/usuario-list/usuario-list.component';
+import { UsuarioFormComponent } from './usuario/usuario-form/usuario-form.component';
+
+import { ChatListComponent } from './chat/chat-list/chat-list.component';
+import { ChatFormComponent } from './chat/chat-form/chat-form.component';
+
 import { MatMomentDateModule, MAT_MOMENT_DATE_FORMATS, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
 import { MAT_DATE_LOCALE, MAT_DATE_FORMATS } from '@angular/material/core';
 
@@ -34,7 +43,9 @@ import { MAT_DATE_LOCALE, MAT_DATE_FORMATS } from '@angular/material/core';
     CursoListComponent,
     CursoFormComponent,
     TurmaListComponent,
-    TurmaFormComponent
+    TurmaFormComponent,
+    UsuarioListComponent,
+    UsuarioFormComponent,
   ],
   imports: [
     BrowserModule,
