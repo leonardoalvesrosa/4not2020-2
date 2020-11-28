@@ -5,6 +5,7 @@ import { NgForm } from '@angular/forms';
 import { ChatService } from '../chat.service';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
+import { UsuarioService } from 'src/app/usuario/usuario.service';
 
 @Component({
   selector: 'app-chat-form',
@@ -16,10 +17,13 @@ export class ChatFormComponent implements OnInit {
   // Variável para armazenar os dados do registro
   chat : any = {}  // Objeto vazio, nome no SINGULAR
 
-  title : string = 'Novo chat'
+  title : string = 'Novo Conversa'
+
+  usuarios : any = []
 
   constructor(
     private chatSrv : ChatService,
+    private usuarioSrv : UsuarioService,
     private snackBar : MatSnackBar,
     private location : Location,
     private actRoute : ActivatedRoute
@@ -33,13 +37,26 @@ export class ChatFormComponent implements OnInit {
         // e disponibilizá-lo para edição        
         this.chat = await this.chatSrv.obterUm(this.actRoute.snapshot.params['id'])
         // 2) Mudar o título da página
-        this.title = 'Editando chat'
+        this.title = 'Editando Conversa'
       }
       catch(erro) {
         console.log(erro)
         this.snackBar.open('ERRO: não foi possível carregar dados para edição.',
           'Que pena!', { duration: 5000 })
       }
+    }
+    // Carrega as listagens das entidades relacionadas
+    this.carregarDados()
+  }
+
+  async carregarDados() {
+    try {
+      this.usuarios = await this.usuarioSrv.listar()
+    }
+    catch(erro) {
+      console.log(erro)
+      this.snackBar.open(`ERRO: não foi possível carregar todos os dados 
+        necessários para a página.`, 'Que pena', { duration: 5000 })
     }
   }
 

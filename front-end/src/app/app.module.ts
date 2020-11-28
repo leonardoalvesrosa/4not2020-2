@@ -46,6 +46,8 @@ import { MAT_DATE_LOCALE, MAT_DATE_FORMATS } from '@angular/material/core';
     TurmaFormComponent,
     UsuarioListComponent,
     UsuarioFormComponent,
+    ChatListComponent,
+    ChatFormComponent
   ],
   imports: [
     BrowserModule,
