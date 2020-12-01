@@ -4,17 +4,17 @@ const esquema = mongoose.Schema({
 
     usuario: {type: mongoose.ObjectId, ref: 'Usuario', required: true},
     nomeProd: {type: String, required: true},
-    categoria: [{
+    categoria: {
         type: String,
         required: true,
         enum: ['Construção', 'Pintura', 'Acabamento']
-    }],
-    modalidade: [{
+    },
+    modalidade: {
         type: String,
         required: true,
         enum: ['Venda', 'Troca', 'Doação']
-    }],
-    img: {type: String, required: true},
+    },
+    img: {type: String, required: false},
     descricao: {type: String, required: true},
     preco: {type: Number, required: true},
     qtde: {type: Number, required: false}

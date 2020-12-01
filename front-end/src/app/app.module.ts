@@ -30,6 +30,12 @@ import { UsuarioFormComponent } from './usuario/usuario-form/usuario-form.compon
 import { ChatListComponent } from './chat/chat-list/chat-list.component';
 import { ChatFormComponent } from './chat/chat-form/chat-form.component';
 
+import { AnuncioProdListComponent } from './anuncioProd/anuncioProd-list/anuncioProd-list.component';
+import { AnuncioProdFormComponent } from './anuncioProd/anuncioProd-form/anuncioProd-form.component';
+
+import { AnuncioServListComponent } from './anuncioServ/anuncioServ-list/anuncioServ-list.component';
+import { AnuncioServFormComponent } from './anuncioServ/anuncioServ-form/anuncioServ-form.component';
+
 import { MatMomentDateModule, MAT_MOMENT_DATE_FORMATS, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
 import { MAT_DATE_LOCALE, MAT_DATE_FORMATS } from '@angular/material/core';
 
@@ -47,7 +53,11 @@ import { MAT_DATE_LOCALE, MAT_DATE_FORMATS } from '@angular/material/core';
     UsuarioListComponent,
     UsuarioFormComponent,
     ChatListComponent,
-    ChatFormComponent
+    ChatFormComponent,
+    AnuncioProdListComponent,
+    AnuncioProdFormComponent,
+    AnuncioServListComponent,
+    AnuncioServFormComponent
   ],
   imports: [
     BrowserModule,

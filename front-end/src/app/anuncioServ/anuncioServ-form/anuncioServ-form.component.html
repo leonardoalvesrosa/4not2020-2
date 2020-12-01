@@ -1,0 +1,53 @@
+<h1>{{ title }}</h1>
+
+<form class="std-form" #f="ngForm" (ngSubmit)="salvar(f)">
+
+  <mat-form-field>
+    <mat-label>Usuário</mat-label>
+    <mat-select [(ngModel)]="anuncioServ.usuario" name="usuario" required>
+      <mat-option *ngFor="let usuario of usuarios" [value]="usuario._id">
+        {{ usuario.nome }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+		<mat-label>Nome do Serviço</mat-label>
+		<input matInput placeholder="Informe o título do serviço" [(ngModel)]="anuncioServ.nomeServ" name="nomeServ" required>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Categoria</mat-label>
+    <mat-select [(ngModel)]="anuncioServ.categoria" name="categoria" required>
+      <mat-option *ngFor="let categoria of categorias" [value]="categoria.val">
+        {{ categoria.val }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+
+  <mat-form-field>
+		<mat-label>Descrição</mat-label>
+		<input matInput placeholder="Informe uma descrição para o serviço" 
+    [(ngModel)]="anuncioServ.descricao" name="descricao" required>
+  </mat-form-field>
+
+  <mat-form-field>
+		<mat-label>Preço</mat-label>
+		<input matInput placeholder="Informe o preço da sua mão-de-obra" 
+    [(ngModel)]="anuncioServ.preco" name="preco" required>
+  </mat-form-field>
+
+
+  <mat-toolbar class="form-buttons">
+    <mat-toolbar-row>
+      <button mat-raised-button type="submit" color="accent">
+        Salvar
+      </button>
+      <button mat-raised-button type="button" (click)="voltar(f)">
+        Voltar
+      </button>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+</form>

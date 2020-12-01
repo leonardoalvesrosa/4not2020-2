@@ -2,23 +2,39 @@
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { UsuarioService } from '../usuario.service';
+import { AnuncioProdService } from '../anuncioProd.service';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
+import { UsuarioService } from 'src/app/usuario/usuario.service';
 
 @Component({
-  selector: 'app-usuario-form',
-  templateUrl: './usuario-form.component.html',
-  styleUrls: ['./usuario-form.component.scss']
+  selector: 'app-anuncioProd-form',
+  templateUrl: './anuncioProd-form.component.html',
+  styleUrls: ['./anuncioProd-form.component.scss']
 })
-export class UsuarioFormComponent implements OnInit {
+export class AnuncioProdFormComponent implements OnInit {
 
   // Variável para armazenar os dados do registro
-  usuario : any = {}  // Objeto vazio, nome no SINGULAR
+  anuncioProd : any = {}  // Objeto vazio, nome no SINGULAR
 
-  title : string = 'Novo usuario'
+  title : string = 'Novo Anúncio'
+
+  usuarios : any = []
+
+  categorias : any = [
+    { val:'Construção' },
+    { val:'Pintura' },
+    { val:'Acabamento' }
+  ]
+
+  modalidades : any = [
+    { val:'Venda' },
+    { val:'Troca' },
+    { val:'Doação' }
+  ]
 
   constructor(
+    private anuncioProdSrv : AnuncioProdService,
     private usuarioSrv : UsuarioService,
     private snackBar : MatSnackBar,
     private location : Location,
@@ -31,9 +47,9 @@ export class UsuarioFormComponent implements OnInit {
       try {
         // 1) Acionar o back-end para buscar esse registro
         // e disponibilizá-lo para edição        
-        this.usuario = await this.usuarioSrv.obterUm(this.actRoute.snapshot.params['id'])
+        this.anuncioProd = await this.anuncioProdSrv.obterUm(this.actRoute.snapshot.params['id'])
         // 2) Mudar o título da página
-        this.title = 'Editando usuario'
+        this.title = 'Editando Anúncio'
       }
       catch(erro) {
         console.log(erro)
@@ -41,19 +57,32 @@ export class UsuarioFormComponent implements OnInit {
           'Que pena!', { duration: 5000 })
       }
     }
+    // Carrega as listagens das entidades relacionadas
+    this.carregarDados()
+  }
+
+  async carregarDados() {
+    try {
+      this.usuarios = await this.usuarioSrv.listar()
+    }
+    catch(erro) {
+      console.log(erro)
+      this.snackBar.open(`ERRO: não foi possível carregar todos os dados 
+        necessários para a página.`, 'Que pena', { duration: 5000 })
+    }
   }
 
   async salvar(form: NgForm) {
     if(form.valid) {
       try {
         // 1) Salvar os dados no back-end
-        // Se o usuario já existir (caso de edição), ele já terá
+        // Se o anuncioProd já existir (caso de edição), ele já terá
         // o atributo _id
-        if(this.usuario._id) {
-          await this.usuarioSrv.atualizar(this.usuario) // Atualização
+        if(this.anuncioProd._id) {
+          await this.anuncioProdSrv.atualizar(this.anuncioProd) // Atualização
         }
         else {
-          await this.usuarioSrv.novo(this.usuario)
+          await this.anuncioProdSrv.novo(this.anuncioProd)
         }
         // 2) Dar o feedback para o usuário
         this.snackBar.open('Dados salvos com sucesso.', 'Entendi',
@@ -81,9 +110,5 @@ export class UsuarioFormComponent implements OnInit {
     if(result) this.location.back()
 
   }
-
-  // teste(form: NgForm){
-  //   alert("Oi")
-  // }
 
 }
