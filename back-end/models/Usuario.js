@@ -8,6 +8,9 @@ const esquema = mongoose.Schema({
     telefone: {type: String, required: true},
     cep: {type: String, required: true},
     endereco: {type: String, required: true},
+    bairro: {type: String, required: true},
+    cidade: {type: String, required: true},
+    estado: {type: String, required: true},
     senha: {type: String, required: true}
     
 })

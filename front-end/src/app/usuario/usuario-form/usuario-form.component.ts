@@ -82,8 +82,32 @@ export class UsuarioFormComponent implements OnInit {
 
   }
 
-  // teste(form: NgForm){
-  //   alert("Oi")
-  // }
+  consultaCep(form: NgForm){
+    // aqui iremos consumir a API da viacep
+    // recupera o valor digitando pelo usuario
+    let cep = Number(document.getElementById("cep"));
+    // precisamos fazer uma requisição ao servidor
+    let req = new XMLHttpRequest();
+    // precisamos definir o local da API
+    let url = `https://viacep.com.br/ws/${cep}/json`;
+    // vamos usar o método GET para fazer a requisição
+    req.open("GET", url, true); // true porque será uma solicitação aassíncrona
+    // vamos enviar a requisição
+    req.send();
+    // vamos trabalhar com a resposta do servidor
+    req.onload = () => {
+      // recuperar o resultado
+      let resultado = req.responseText;
+      // transformar em JSON
+      resultado = JSON.parse(resultado);
+      console.log(resultado);
+      // vamos jogar o resultado no formulário
+      document.getElementById('endereco').innerHTML = resultado;
+      // document.getElementById('bairro').innerHTML = resultado.bairro;
+      // document.getElementById('cidade').innerHTML = resultado.localidade;
+      // document.getElementById('estado').innerHTML = resultado.uf;
+
+    }
+  }
 
 }

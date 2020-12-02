@@ -23,7 +23,7 @@
 
   <mat-form-field>
 		<mat-label>Celular</mat-label>
-		<input matInput placeholder="Informe o seu celular" [(ngModel)]="usuario.telefone" name="telefone" required mask="(00) 00000-0000" [dropSpecialCharacters]="false">
+		<input matInput placeholder="Informe o seu celular" [(ngModel)]="usuario.telefone" name="telefone" required mask="(00) 00000-0000" [dropSpecialCharacters]="false" >
   </mat-form-field>
 
   <!-- <mat-form-field>
@@ -33,12 +33,33 @@
 
   <mat-form-field>
 		<mat-label>CEP</mat-label>
-		<input matInput placeholder="Informe o seu CEP" [(ngModel)]="usuario.cep" name="cep" required mask="00000-000" [dropSpecialCharacters]="false">
+		<input matInput placeholder="Informe o seu CEP" 
+    [(ngModel)]="usuario.cep" 
+    name="cep" 
+    id="cep"
+    required mask="00000-000" 
+    [dropSpecialCharacters]="false"
+    (change)="consultaCep(f)">
   </mat-form-field>
 
   <mat-form-field>
-		<mat-label>Endereço</mat-label>
-		<input matInput placeholder="Informe o seu endereco" [(ngModel)]="usuario.endereco" name="endereco">
+    <mat-label>Endereço</mat-label>
+      <input matInput placeholder="Informe o seu endereco" [(ngModel)]="usuario.endereco" name="endereco" id="endereco">
+  </mat-form-field>
+
+  <mat-form-field>
+		<mat-label>Bairro</mat-label>
+		<input matInput placeholder="Informe o seu bairro" [(ngModel)]="usuario.bairro" name="bairro" id="bairro">
+  </mat-form-field>
+
+  <mat-form-field>
+		<mat-label>Cidade</mat-label>
+		<input matInput placeholder="Informe o sua cidade" [(ngModel)]="usuario.cidade" name="cidade" id="cidade">
+  </mat-form-field>
+
+  <mat-form-field>
+		<mat-label>Estado</mat-label>
+		<input matInput placeholder="Informe o seu estado" [(ngModel)]="usuario.estado" name="estado" id="estado">
   </mat-form-field>
 
   <mat-form-field>
