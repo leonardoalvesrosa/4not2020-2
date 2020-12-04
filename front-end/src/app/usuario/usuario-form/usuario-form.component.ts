@@ -5,6 +5,7 @@ import { NgForm } from '@angular/forms';
 import { UsuarioService } from '../usuario.service';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
+import { CepService } from 'src/app/cep/cep.service';
 
 @Component({
   selector: 'app-usuario-form',
@@ -20,6 +21,7 @@ export class UsuarioFormComponent implements OnInit {
 
   constructor(
     private usuarioSrv : UsuarioService,
+    private cepSrv : CepService,
     private snackBar : MatSnackBar,
     private location : Location,
     private actRoute : ActivatedRoute
@@ -82,18 +84,22 @@ export class UsuarioFormComponent implements OnInit {
 
   }
 
+
   consultaCep(form: NgForm){
     // aqui iremos consumir a API da viacep
     // recupera o valor digitando pelo usuario
-    let cep = Number(document.getElementById("cep"));
+    let cep = String(document.getElementById("cep"));
     // precisamos fazer uma requisição ao servidor
     let req = new XMLHttpRequest();
     // precisamos definir o local da API
-    let url = `https://viacep.com.br/ws/${cep}/json`;
+    //let url = `https://viacep.com.br/ws/${cep}/json`;
+ 
+    this.cepSrv.capturaCep(cep);
+
     // vamos usar o método GET para fazer a requisição
-    req.open("GET", url, true); // true porque será uma solicitação aassíncrona
+    //req.open("GET", url, true); // true porque será uma solicitação aassíncrona
     // vamos enviar a requisição
-    req.send();
+    //req.send();
     // vamos trabalhar com a resposta do servidor
     req.onload = () => {
       // recuperar o resultado
@@ -102,7 +108,7 @@ export class UsuarioFormComponent implements OnInit {
       resultado = JSON.parse(resultado);
       console.log(resultado);
       // vamos jogar o resultado no formulário
-      document.getElementById('endereco').innerHTML = resultado;
+      //document.getElementById('endereco').innerHTML = resultado;
       // document.getElementById('bairro').innerHTML = resultado.bairro;
       // document.getElementById('cidade').innerHTML = resultado.localidade;
       // document.getElementById('estado').innerHTML = resultado.uf;

@@ -31,7 +31,7 @@
 		<input matInput placeholder="Informe o seu CEP" [(ngModel)]="usuario.cep" name="cep" required mask="00000-000" [dropSpecialCharacters]="false" (change)="teste(f)">
   </mat-form-field> -->
 
-  <mat-form-field>
+  <!-- <mat-form-field>
 		<mat-label>CEP</mat-label>
 		<input matInput placeholder="Informe o seu CEP" 
     [(ngModel)]="usuario.cep" 
@@ -40,6 +40,16 @@
     required mask="00000-000" 
     [dropSpecialCharacters]="false"
     (change)="consultaCep(f)">
+  </mat-form-field> -->
+
+  <mat-form-field>
+		<mat-label>CEP</mat-label>
+		<input matInput placeholder="Informe o seu CEP" 
+    [(ngModel)]="usuario.cep" 
+    name="cep" 
+    id="cep"
+    required mask="00000-000" 
+    [dropSpecialCharacters]="false">
   </mat-form-field>
 
   <mat-form-field>
